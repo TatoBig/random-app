@@ -1,19 +1,30 @@
 <script lang="ts">
 	let error: string | undefined;
-	const metodo4 = (cantidad: number, semilla: number, a: number, c: number, m: number) => {
-		if (cantidad <= 0 || semilla <= 0 || a <= 0 || c <= 0 || m <= 0) {
-			error = 'Solo es posible usar números positivos';
-			return [0];
-		}
+	const metodo7 = (
+		cantidad: number,
+		semilla: number,
+		a: number,
+		b: number,
+		c: number,
+		m: number
+	) => {
 		const numerosGenerados: string[] = [];
+		error = undefined;
+		if (a % 2 !== 0) {
+			error = '"a" debe ser un número par';
+		}
+		if (c % 2 === 0) {
+			error = '"c" debe ser un número impar';
+		}
 
 		let x = semilla;
 
 		for (let i = 0; i < cantidad; i++) {
-			x = (a * x + c) % m;
-			console.log(x);
+			x = (a * x ** 2 + b * x + c) % m;
 			numerosGenerados.push((x / (m - 1)).toFixed(4).toString());
 		}
+
+		console.log(numerosGenerados);
 
 		return numerosGenerados;
 	};
@@ -29,10 +40,11 @@
 			const [key, value] = field;
 			data[key] = value;
 		}
-		numeros = metodo4(
+		numeros = metodo7(
 			parseInt(data.quantity),
 			parseInt(data.seed),
 			parseInt(data.a),
+			parseInt(data.b),
 			parseInt(data.c),
 			parseInt(data.m)
 		);
@@ -40,10 +52,11 @@
 </script>
 
 <div class="container shadow">
-	<h1>Congruencial mixto (algoritmo lineal)</h1>
+	<h1>Algoritmo Congruencial Cuadrático</h1>
 	<form on:submit|preventDefault={onSubmit} class="container">
 		<input placeholder="Semilla" name="seed" />
 		<input placeholder="a" name="a" />
+		<input placeholder="b" name="b" />
 		<input placeholder="c" name="c" />
 		<input placeholder="m" name="m" />
 		<input placeholder="Cantidad a generar" name="quantity" />

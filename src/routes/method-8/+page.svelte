@@ -1,19 +1,17 @@
 <script lang="ts">
 	let error: string | undefined;
-	const metodo4 = (cantidad: number, semilla: number, a: number, c: number, m: number) => {
-		if (cantidad <= 0 || semilla <= 0 || a <= 0 || c <= 0 || m <= 0) {
-			error = 'Solo es posible usar números positivos';
-			return [0];
-		}
+	const metodo8 = (cantidad: number, semilla: number, m: number) => {
 		const numerosGenerados: string[] = [];
+		error = undefined;
 
 		let x = semilla;
 
 		for (let i = 0; i < cantidad; i++) {
-			x = (a * x + c) % m;
-			console.log(x);
+			x = x ** 2 % m;
 			numerosGenerados.push((x / (m - 1)).toFixed(4).toString());
 		}
+
+		console.log(numerosGenerados);
 
 		return numerosGenerados;
 	};
@@ -29,22 +27,14 @@
 			const [key, value] = field;
 			data[key] = value;
 		}
-		numeros = metodo4(
-			parseInt(data.quantity),
-			parseInt(data.seed),
-			parseInt(data.a),
-			parseInt(data.c),
-			parseInt(data.m)
-		);
+		numeros = metodo8(parseInt(data.quantity), parseInt(data.seed), parseInt(data.m));
 	}
 </script>
 
 <div class="container shadow">
-	<h1>Congruencial mixto (algoritmo lineal)</h1>
+	<h1>Algoritmo de Blum, Blum y Shub</h1>
 	<form on:submit|preventDefault={onSubmit} class="container">
 		<input placeholder="Semilla" name="seed" />
-		<input placeholder="a" name="a" />
-		<input placeholder="c" name="c" />
 		<input placeholder="m" name="m" />
 		<input placeholder="Cantidad a generar" name="quantity" />
 		<button type="submit"> Generar numeros </button>
