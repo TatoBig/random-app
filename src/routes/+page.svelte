@@ -24,6 +24,7 @@
 	<li>
 		<a href="/method-8"> Algoritmo de Blum, Blum y Shub (extra) </a>
 	</li>
+	<div class="name">Por Santiago Navas 1551619</div>
 </div>
 
 <style>
@@ -32,6 +33,13 @@
 		background-color: whitesmoke;
 		padding: 16px;
 		filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+	}
+
+	.name {
+		display: flex;
+		justify-content: center;
+		font-weight: bold;
+		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	}
 
 	li,
